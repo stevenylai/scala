@@ -62,6 +62,7 @@ class Customers extends Sortable[Customer] {
 }
 object Customer {
   def apply(name: String, address: String) = new Customer(name, address)
+  def unapply(customer: Customer): Option[(String, String)] = Some((customer.name, customer.address))
 
   def main(args: Array[String]) {
     val eric = new Customer("Eric", "29 Acacia Road")
@@ -76,5 +77,8 @@ object Customer {
     customers.add(new Customer("Steven", "1st"))
     customers.add(new DiscountedCustomer("Sally", "2nd"))
     println(customers.sort)
+    eric match {
+      case Customer(name, address) => println(name + " " + address)
+    }
   }
 }
